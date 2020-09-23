@@ -32,6 +32,15 @@ de a tartalma olyan legyen, mintha egy programot irnal!
 */
 
 int main_t() {
+
+	float a, b;
+
+	scanf("%f %f", &a, &b);
+
+	printf("T = %0.3f\r\n", a * b);
+	printf("K = %0.3f\r\n", a + b);
+
+	return 0;
 }
 /***********************************************************************
 ************************************************************************
