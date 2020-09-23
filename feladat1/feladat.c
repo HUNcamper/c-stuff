@@ -38,7 +38,7 @@ int main_t() {
 	scanf("%f %f", &a, &b);
 
 	printf("T = %0.3f\r\n", a * b);
-	printf("K = %0.3f\r\n", a + b);
+	printf("K = %0.3f\r\n", a*2 + b*2);
 
 	return 0;
 }
