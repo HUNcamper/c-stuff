@@ -13,62 +13,54 @@
 ***********************************************************************/
 
 /*
-1. feladat (1 pont)
+1. feladat (5 pont)
 
-Keszits egy programot, amely kiirja a ``Hello, Progalap!'' szoveget a
-kepernyore ugy, hogy az ezt koveto kiiratas a sor elejen kezdodjon majd!
+A feladat meghatarozni ket egesz szam kozotti zart intervallumba eso primszamok osszeget.
+A fuggveny ket parametere sorban az intervallum also (a) es felso (b) vegpontja.
+Visszateresi erteke az intervallumba eso primszamok osszege.
+(Mivel az intervallum zart, ezert a vegpontok meg az intervallum reszei.)
 
-A programot main helyett main_p neven keszitsd el, de a tartalma olyan
-legyen, mintha egy programot irnal!
+A feladat a math.h hasznalata nelkul megoldhato ket ciklussal.
+A kulso ciklus a-tol indul, es b-ig tart.
+A kulso ciklus magjaban ellenorizzuk a ciklusvaltozorol, hogy prim-e.
+Ez az ellenorzes egy belso ciklusban zajlik, ahol a belso ciklusvaltozo 2-tol indul, es addig tart amig kisebb a kulso ciklusvaltozonal.
+A belso ciklus magjaban ellenorizzuk, hogy a belso ciklusvaltozo osztja-e a kulso ciklusvaltozot.
+Ha igen, akkor a kulso ciklusvaltozo nem prim, ezt eltaroljuk.
+(Peldaul egy nullara inicializalt segedvaltozoban, amit ekkor egyre allitunk.)
+Ha a kulso ciklusvaltozo prim, akkor hozzaadjuk egy osszeget tartalmazo valtozohoz.
+A fuggveny ezzel az eredetileg 0-ra inicializalt valtozoval ter vissza.
+(Nulla darab ertek osszege 0, tovabba ne feledjuk a megfelelo ponton a segedvaltozot visszaallitani nullara.)
+
+A feladat megoldhato ugy is, hogy a primtesztelest kiszervezzuk fuggvenybe.
+
+Kodold le C nyelven a fuggvenyt!
+A fuggveny fejlecen ne valtoztass!
+A fuggveny inputjai a parameterek, outputja a visszateresi ertek.
+A fuggveny nem vegez IO muveleteket!
 */
 
-int main_p() {
-	printf("Hello, Progalap!\n");
-	return 0;
+int primosszeg(int a, int b) {
+    int osszeg = 0;
+
+    for(int i = a; i <= b; i++) {
+        if(tesztprim(i)) {
+            osszeg += i;
+        }
+    }
+
+    return osszeg;
 }
 
-/*
-2. feladat (2 pont)
+int tesztprim(int prim) {
+    if(prim < 2) return 0;
 
-Keszits egy programot, amely a standard inputrol beolvas harom egesz
-szamot, majd a beolvasott szamok osszeget kiirja a kepernyore!
-A kiiratast sorvege jel zarja!
-A program mast ne irjon ki!
+    for(int i = 2; i < prim; i++) {
+        if(prim % i == 0) {
+            return 0;
+        }
+    }
 
-A programot main helyett main_i neven keszitsd el,
-de a tartalma olyan legyen, mintha egy programot irnal!
-*/
-
-int main_i() {
-	int a, b, c;
-	scanf("%d %d %d", &a, &b, &c);
-
-	printf("%d\n", a+b+c);
-
-	return 0;
-}
-
-/*
-3. feladat (2 pont)
-
-Keszits egy programot, amely a standard inputrol beolvas egy x valos
-szamot, majd a szam negyzetet kiirja a kepernyore X*X=Y formaban,
-ahol X maga a beolvasott szam, Y pedig X negyzete!
-A szamokat 4 tizedesjegy pontossaggal kell kiiratni.
-A kiiratast sorvege jel zarja! A program mast ne irjon ki!
-
-A programot main helyett main_v neven keszitsd el,
-de a tartalma olyan legyen, mintha egy programot irnal!
-*/
-
-int main_v() {
-	float a;
-
-	scanf("%f", &a);
-
-	printf("%0.4f*%0.04f=%0.04f\n", a, a, a*a);
-
-	return 0;
+    return 1;
 }
 /***********************************************************************
 ************************************************************************
@@ -80,59 +72,39 @@ int main_v() {
 
 void call_1()
 {
-	main_p();
+	int a, b, eredmeny;
+	if (fscanf(stdin, "%d %d", &a, &b) != 2) {
+		fprintf(stderr, "HIBA: Nem olvasható adat!\n");
+		return;
+	}
+	eredmeny = primosszeg(a, b);
+	fprintf(stdout, "%d\n", eredmeny);
 }
 void test_1()
 {
-	main_p();
-}
-
-void call_2()
-{
-  int check;
-  if((check = fgetc(stdin)) == EOF) {
-    fprintf(stderr, "HIBA: Nem olvashato adat!\n");
-    return;
-  }
-  if(main_i() && (check == 'R')) {
-    fputs("RETURNS NONZERO", stdout);
-  }
-}
-void test_2()
-{
-	main_i();
-}
-
-void call_3()
-{
-  int check;
-  if((check = fgetc(stdin)) == EOF) {
-    fprintf(stderr, "HIBA: Nem olvasható adat!\n");
-    return;
-  }
-  if(main_v() && (check == 'R')) {
-    fputs("RETURNS NONZERO", stdout);
-  }
-}
-void test_3()
-{
-	main_v();
+	int eredmeny, i;
+	struct {int a; int b; int eredmeny;} testlist[2] = {{1, 13, 41}, {4, 15, 36}};
+	for (i = 0; i < 2; ++i) {
+		eredmeny = primosszeg(testlist[i].a, testlist[i].b);
+		if (eredmeny != testlist[i].eredmeny) {
+			fprintf(stderr, "HIBA: primosszeg(%d, %d)\n"
+							"\telvárt eredmény: %d\n"
+							"\tkapott eredmény: %d\n",
+				testlist[i].a, testlist[i].b, testlist[i].eredmeny, eredmeny);
+		}
+	}
 }
 
 typedef void (*call_function)();
 
 call_function call_table[] = {
 	call_1,
-	call_2,
-	call_3,
 	NULL
 };
 
 
 call_function test_table[] = {
 	test_1,
-	test_2,
-	test_3,
 	NULL
 };
 
