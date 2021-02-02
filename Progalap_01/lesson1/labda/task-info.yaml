@@ -1,0 +1,130 @@
+type: edu
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(global-lesson1-labda)
+
+    set(CMAKE_CXX_STANDARD 14)
+
+    # Files from `./src` directory
+    set(SRC
+            src/labda.c)
+
+    # Files from `./test` directory
+    set(TEST
+            test/test.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+
+    # Running tests
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    configure_test_target(${PROJECT_NAME}-test ${SRC} ${TEST})
+  learner_created: false
+- name: test/test.cpp
+  visible: false
+  text: |
+    #include <gtest/gtest.h>
+
+    #define main main_0
+    #include "../src/labda.c"
+    #undef main
+
+    void fail() {
+        FAIL();
+    }
+
+    void testEqual(double a, double b) {
+        double diff = a > b ? a - b : b - a;
+
+        if (diff > 0.001) {
+            fail();
+            printf("Expected equality of these values:\n");
+            printf("  res\n");
+            printf("    Which is: %lf\n", a);
+            printf("  %lf\n", b);
+        }
+    }
+
+
+    TEST(Test, 01) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        testEqual(utkozes(10, 20), 1.7213);
+    }
+
+    TEST(Test, 02) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        testEqual(utkozes(5, 10), 1.170677);
+    }
+
+    TEST(Test, 03) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        testEqual(utkozes(20, 10), 1.7213);
+    }
+
+    TEST(Test, 04) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        testEqual(utkozes(10, 5), 1.170677);
+    }
+
+    TEST(Test, 05) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        testEqual(utkozes(30, 5), 2.234928);
+    }
+
+    TEST(Test, 06) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        testEqual(utkozes(5, 40), 2.767054);
+    }
+
+    TEST(Test, 07) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        testEqual(utkozes(10, 80), 3.918704);
+    }
+  learner_created: false
+- name: src/labda.c
+  visible: true
+  placeholders:
+  - offset: 37
+    length: 11
+    placeholder_text: // megoldas
+    initial_state:
+      length: 11
+      offset: 37
+    initialized_from_dependency: false
+    possible_answer: |-
+      double utkozes(double h1, double h2) {
+          // az elso labda legyen alul
+          if (h1 > h2) {
+              double tmp = h1;
+              h1 = h2;
+              h2 = tmp;
+          }
+
+          // 1. Mikor er le az elso?
+          double t0 = sqrt(2 * (h1 - 0.5) / g);
+
+          // 2. Hol van ilyenkor a masik?
+          double posH2 = h2 - (h1 - 0.5);
+
+          // 3. A kozos kezdosebesseg
+          double v0 = g * t0;
+
+          // 4. Az utkozesig eltelo ido
+          double t1 = (posH2 - 0.5 - 1) / (2 * v0);
+
+          // 5. Az osszesitett ido kiszamitasa
+          double t = t0 + t1;
+
+          return t;
+      }
+    selected: false
+    status: Unchecked
+  text: |-
+    #include <math.h>
+
+    double g = 9.81;
+
+    // megoldas
+  learner_created: false
+status: Unchecked
+record: -1
+solution_hidden: true

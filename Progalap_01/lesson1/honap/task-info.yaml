@@ -1,0 +1,193 @@
+type: edu
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(global-lesson1-honap)
+
+    set(CMAKE_CXX_STANDARD 14)
+
+    # Files from `./src` directory
+    set(SRC
+            src/honap.c)
+
+    # Files from `./test` directory
+    set(TEST
+            test/test.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+
+    # Running tests
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    configure_test_target(${PROJECT_NAME}-test ${SRC} ${TEST})
+  learner_created: false
+- name: src/honap.c
+  visible: true
+  placeholders:
+  - offset: 56
+    length: 11
+    placeholder_text: // megoldas
+    initial_state:
+      length: 11
+      offset: 56
+    initialized_from_dependency: false
+    possible_answer: |-
+      switch (sorszam) {
+              case 1:
+                  printf("januar");
+                  break;
+              case 2:
+                  printf("februar");
+                  break;
+              case 3:
+                  printf("marcius");
+                  break;
+              case 4:
+                  printf("aprilis");
+                  break;
+              case 5:
+                  printf("majus");
+                  break;
+              case 6:
+                  printf("junius");
+                  break;
+              case 7:
+                  printf("julius");
+                  break;
+              case 8:
+                  printf("augusztus");
+                  break;
+              case 9:
+                  printf("szeptember");
+                  break;
+              case 10:
+                  printf("oktober");
+                  break;
+              case 11:
+                  printf("november");
+                  break;
+              case 12:
+                  printf("december");
+                  break;
+              default:
+                  printf("nincs ilyen honap");
+                  break;
+          }
+    selected: false
+    status: Unchecked
+  text: |-
+    #include <stdio.h>
+
+    void melyikHonap(int sorszam) {
+        // megoldas
+    }
+  learner_created: false
+- name: test/test.cpp
+  visible: false
+  text: |
+    #include <gtest/gtest.h>
+
+    #define main main_0
+    #include "../src/honap.c"
+    #undef main
+
+    #include "../../tools.cpp"
+
+    TEST(HelyesHonap, 01) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(6))
+        ASSERT_STREQ("junius", readstring(file, honap));
+    }
+
+    TEST(HelyesHonap, 02) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(1))
+        ASSERT_STREQ("januar", readstring(file, honap));
+    }
+
+    TEST(HelyesHonap, 03) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(5))
+        ASSERT_STREQ("majus", readstring(file, honap));
+    }
+
+    TEST(HelyesHonap, 04) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(2))
+        ASSERT_STREQ("februar", readstring(file, honap));
+    }
+
+    TEST(HelyesHonap, 05) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(4))
+        ASSERT_STREQ("aprilis", readstring(file, honap));
+    }
+
+    TEST(HelyesHonap, 06) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(3))
+        ASSERT_STREQ("marcius", readstring(file, honap));
+    }
+
+    TEST(HelyesHonap, 07) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(11))
+        ASSERT_STREQ("november", readstring(file, honap));
+    }
+
+    TEST(HelyesHonap, 08) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(12))
+        ASSERT_STREQ("december", readstring(file, honap));
+    }
+
+    TEST(HelyesHonap, 09) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(9))
+        ASSERT_STREQ("szeptember", readstring(file, honap));
+    }
+
+    TEST(HelyesHonap, 10) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(7))
+        ASSERT_STREQ("julius", readstring(file, honap));
+    }
+
+    TEST(HelyesHonap, 11) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(10))
+        ASSERT_STREQ("oktober", readstring(file, honap));
+    }
+
+    TEST(HelyesHonap, 12) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(8))
+        ASSERT_STREQ("augusztus", readstring(file, honap));
+    }
+
+    TEST(HelytelenHonap, 01) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(0))
+        ASSERT_STREQ("nincs ilyen honap", readstring(file, honap));
+    }
+
+    TEST(HelytelenHonap, 02) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(-5))
+        ASSERT_STREQ("nincs ilyen honap", readstring(file, honap));
+    }
+
+    TEST(HelytelenHonap, 03) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        char honap[100];
+        KIIR(melyikHonap(1521))
+        ASSERT_STREQ("nincs ilyen honap", readstring(file, honap));
+    }
+  learner_created: false
+status: Unchecked
+record: -1
+solution_hidden: true

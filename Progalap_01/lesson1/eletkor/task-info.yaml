@@ -1,0 +1,92 @@
+type: edu
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(global-lesson1-eletkor)
+
+    set(CMAKE_CXX_STANDARD 14)
+
+    # Files from `./src` directory
+    set(SRC
+            src/eletkor.c)
+
+    # Files from `./test` directory
+    set(TEST
+            test/test.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+
+    # Running tests
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    configure_test_target(${PROJECT_NAME}-test ${SRC} ${TEST})
+  learner_created: false
+- name: src/eletkor.c
+  visible: true
+  placeholders:
+  - offset: 20
+    length: 11
+    placeholder_text: // megoldas
+    initial_state:
+      length: 11
+      offset: 20
+    initialized_from_dependency: false
+    possible_answer: |-
+      int korbeolvas() {
+          int kor;
+          scanf("%d", &kor);
+          return kor;
+      }
+    selected: false
+    status: Unchecked
+  text: |
+    #include <stdio.h>
+
+    // megoldas
+  learner_created: false
+- name: test/test.cpp
+  visible: false
+  text: |
+    #include <gtest/gtest.h>
+
+    #define main main_0
+    #include "../src/eletkor.c"
+    #undef main
+
+    #include "../../tools.cpp"
+
+    int korbeolvas();
+
+    TEST(Test, 01) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        BEOLVAS("7", int res = korbeolvas());
+        ASSERT_EQ(res, 7);
+    }
+
+    TEST(Test, 02) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        BEOLVAS("27", int res = korbeolvas());
+        ASSERT_EQ(res, 27);
+    }
+
+    TEST(Test, 03) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        BEOLVAS("74", int res = korbeolvas());
+        ASSERT_EQ(res, 74);
+    }
+
+    TEST(Test, 04) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        BEOLVAS("55", int res = korbeolvas());
+        ASSERT_EQ(res, 55);
+    }
+
+    TEST(Test, 05) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        BEOLVAS("103", int res = korbeolvas());
+        ASSERT_EQ(res, 103);
+    }
+  learner_created: false
+status: Unchecked
+record: -1
+solution_hidden: true

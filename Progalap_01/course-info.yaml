@@ -1,0 +1,9 @@
+title: Progalap_01
+language: English
+summary: kiíratás, beolvasás, változók létrehozása, műveletek változókkal, függvények,
+  feltételes szerkezetek
+programming_language: C/C++
+environment: GoogleTest
+content:
+- lesson1
+mode: Study

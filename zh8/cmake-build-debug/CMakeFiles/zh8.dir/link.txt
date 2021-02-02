@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\zh8.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\zh8.dir/objects.a @CMakeFiles\zh8.dir\objects1.rsp
+C:\MinGW\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\zh8.dir/objects.a -Wl,--no-whole-archive  -o zh8.exe -Wl,--out-implib,libzh8.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\zh8.dir\linklibs.rsp

@@ -1,0 +1,83 @@
+type: edu
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(global-lesson1-kamion)
+
+    set(CMAKE_CXX_STANDARD 14)
+
+    # Files from `./src` directory
+    set(SRC
+            src/kamion.c)
+
+    # Files from `./test` directory
+    set(TEST
+            test/test.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+
+    # Running tests
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    configure_test_target(${PROJECT_NAME}-test ${SRC} ${TEST})
+  learner_created: false
+- name: src/kamion.c
+  visible: true
+  placeholders:
+  - offset: 35
+    length: 17
+    placeholder_text: // tobbi fuggveny
+    initial_state:
+      length: 17
+      offset: 35
+    initialized_from_dependency: false
+    possible_answer: |-
+      int kozepesKamion() {
+          return 7;
+      }
+
+      int nagyKamion() {
+          return 10;
+      }
+    selected: false
+    status: Unchecked
+  text: |-
+    int kisKamion() {
+        return 3;
+    }
+
+    // tobbi fuggveny
+  learner_created: false
+- name: test/test.cpp
+  visible: false
+  text: |-
+    #include <gtest/gtest.h>
+
+    #define main main_0
+    #include "../src/kamion.c"
+    #undef main
+
+    int kisKamion();
+    int kozepesKamion();
+    int nagyKamion();
+
+    TEST(Test, kisKamion) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        ASSERT_EQ(kisKamion(), 3);
+    }
+
+    TEST(Test, kozepesKamion) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        ASSERT_EQ(kozepesKamion(), 7);
+    }
+
+    TEST(Test, nagyKamion) { // NOLINT(cert-err58-cpp) suppress for initialization static field in generated class
+        ASSERT_EQ(nagyKamion(), 10);
+    }
+  learner_created: false
+status: Unchecked
+record: -1
+solution_hidden: true
