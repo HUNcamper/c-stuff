@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\no_semicolon.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\no_semicolon.dir/objects.a @CMakeFiles\no_semicolon.dir\objects1.rsp
-C:\MinGW\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\no_semicolon.dir/objects.a -Wl,--no-whole-archive  -o no_semicolon.exe -Wl,--out-implib,libno_semicolon.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\no_semicolon.dir\linklibs.rsp

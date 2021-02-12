@@ -1,3 +1,0 @@
-E:/Projects/C/szamhalo_szorg/cmake-build-debug/CMakeFiles/szamhalo_szorg.dir
-E:/Projects/C/szamhalo_szorg/cmake-build-debug/CMakeFiles/edit_cache.dir
-E:/Projects/C/szamhalo_szorg/cmake-build-debug/CMakeFiles/rebuild_cache.dir

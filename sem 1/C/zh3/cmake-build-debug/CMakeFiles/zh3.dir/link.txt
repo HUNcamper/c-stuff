@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\zh3.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\zh3.dir/objects.a @CMakeFiles\zh3.dir\objects1.rsp
-C:\MinGW\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\zh3.dir/objects.a -Wl,--no-whole-archive  -o zh3.exe -Wl,--out-implib,libzh3.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\zh3.dir\linklibs.rsp

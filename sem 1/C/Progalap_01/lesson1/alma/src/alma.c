@@ -1,1 +1,0 @@
-// hozd letre a valtozot

@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\szamhalo_szorg.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\szamhalo_szorg.dir/objects.a @CMakeFiles\szamhalo_szorg.dir\objects1.rsp
-C:\MinGW\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\szamhalo_szorg.dir/objects.a -Wl,--no-whole-archive  -o szamhalo_szorg.exe -Wl,--out-implib,libszamhalo_szorg.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\szamhalo_szorg.dir\linklibs.rsp
